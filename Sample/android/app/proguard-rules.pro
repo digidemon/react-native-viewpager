@@ -40,20 +40,17 @@
 
 -keep class * extends com.facebook.react.bridge.JavaScriptModule { *; }
 -keep class * extends com.facebook.react.bridge.NativeModule { *; }
--keepclassmembers,includedescriptorclasses class * { native <methods>; }
 -keepclassmembers class *  { @com.facebook.react.uimanager.UIProp <fields>; }
--keepclassmembers class *  { @com.facebook.react.uimanager.annotations.ReactProp <methods>; }
--keepclassmembers class *  { @com.facebook.react.uimanager.annotations.ReactPropGroup <methods>; }
-
--dontwarn com.facebook.react.**
+-keepclassmembers class *  { @com.facebook.react.uimanager.ReactProp <methods>; }
+-keepclassmembers class *  { @com.facebook.react.uimanager.ReactPropGroup <methods>; }
 
 # okhttp
 
 -keepattributes Signature
 -keepattributes *Annotation*
--keep class okhttp3.** { *; }
--keep interface okhttp3.** { *; }
--dontwarn okhttp3.**
+-keep class com.squareup.okhttp.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+-dontwarn com.squareup.okhttp.**
 
 # okio
 

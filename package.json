@@ -1,15 +1,66 @@
 {
-  "name": "react-native-viewpager",
-  "version": "0.2.13",
+  "_args": [
+    [
+      {
+        "raw": "react-native-viewpager@0.2.1",
+        "scope": null,
+        "escapedName": "react-native-viewpager",
+        "name": "react-native-viewpager",
+        "rawSpec": "0.2.1",
+        "spec": "0.2.1",
+        "type": "version"
+      },
+      "/Users/esaltaferi/src/internal/workingmind-client"
+    ]
+  ],
+  "_from": "react-native-viewpager@0.2.1",
+  "_id": "react-native-viewpager@0.2.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/react-native-viewpager",
+  "_nodeVersion": "4.1.1",
+  "_npmUser": {
+    "name": "race604",
+    "email": "race604@gmail.com"
+  },
+  "_npmVersion": "2.14.4",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-viewpager@0.2.1",
+    "scope": null,
+    "escapedName": "react-native-viewpager",
+    "name": "react-native-viewpager",
+    "rawSpec": "0.2.1",
+    "spec": "0.2.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-viewpager/-/react-native-viewpager-0.2.1.tgz",
+  "_shasum": "ec354f513a02e966f2ce7f5434b7fa1cc2d7b76b",
+  "_shrinkwrap": null,
+  "_spec": "react-native-viewpager@0.2.1",
+  "_where": "/Users/esaltaferi/src/internal/workingmind-client",
+  "author": {
+    "name": "Race604"
+  },
+  "bugs": {
+    "url": "https://github.com/race604/react-native-viewpager/issues"
+  },
+  "dependencies": {
+    "react-timer-mixin": "^0.13.3",
+    "warning": "^2.1.0"
+  },
   "description": "ViewPager componnent for React Native",
-  "main": "ViewPager.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "ec354f513a02e966f2ce7f5434b7fa1cc2d7b76b",
+    "tarball": "https://registry.npmjs.org/react-native-viewpager/-/react-native-viewpager-0.2.1.tgz"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/race604/react-native-viewpager.git"
-  },
+  "gitHead": "3aabf95360bd84554c3141e6a5a9d49ca8cd01a8",
+  "homepage": "https://github.com/race604/react-native-viewpager#readme",
   "keywords": [
     "react-native-component",
     "react-component",
@@ -19,14 +70,23 @@
     "viewpager",
     "pager"
   ],
-  "author": "Race604",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/race604/react-native-viewpager/issues"
+  "main": "ViewPager.js",
+  "maintainers": [
+    {
+      "name": "race604",
+      "email": "race604@gmail.com"
+    }
+  ],
+  "name": "react-native-viewpager",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/race604/react-native-viewpager.git"
   },
-  "homepage": "https://github.com/race604/react-native-viewpager#readme",
-  "dependencies": {
-    "react-timer-mixin": "^0.13.3",
-    "warning": "^2.1.0"
-  }
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.2.1"
 }

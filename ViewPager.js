@@ -1,9 +1,6 @@
 'use strict';
 
-var React = require('react');
-var { PropTypes } = React;
-
-var ReactNative = require('react-native');
+var React = require('react-native');
 var {
   Dimensions,
   Text,
@@ -11,8 +8,9 @@ var {
   TouchableOpacity,
   PanResponder,
   Animated,
+  PropTypes,
   StyleSheet,
-} = ReactNative;
+} = React;
 
 var StaticRenderer = require('react-native/Libraries/Components/StaticRenderer');
 var TimerMixin = require('react-timer-mixin');
@@ -41,7 +39,6 @@ var ViewPager = React.createClass({
     locked: PropTypes.bool,
     autoPlay: PropTypes.bool,
     animation: PropTypes.func,
-    initialPage: PropTypes.number,
   },
 
   fling: false,
@@ -78,9 +75,9 @@ var ViewPager = React.createClass({
           vx = gestureState.vx;
 
       var step = 0;
-      if (relativeGestureDistance < -0.5 || (relativeGestureDistance < 0 && vx <= -1e-6)) {
+      if (relativeGestureDistance < -0.5 || (relativeGestureDistance < 0 && vx <= 0.5)) {
         step = 1;
-      } else if (relativeGestureDistance > 0.5 || (relativeGestureDistance > 0 && vx >= 1e-6)) {
+      } else if (relativeGestureDistance > 0.5 || (relativeGestureDistance > 0 && vx >= 0.5)) {
         step = -1;
       }
 
@@ -118,12 +115,6 @@ var ViewPager = React.createClass({
       this.childIndex = 1;
       this.state.scrollValue.setValue(1);
     }
-    if(this.props.initialPage){
-      var initialPage = Number(this.props.initialPage);
-      if (initialPage > 0) {
-        this.goToPage(initialPage, false);
-      }
-    }
   },
 
   componentDidMount() {
@@ -154,7 +145,6 @@ var ViewPager = React.createClass({
       }
 
       this.childIndex = Math.min(this.childIndex, constrainedPage);
-      this.fling = false;
     }
 
   },
@@ -168,7 +158,7 @@ var ViewPager = React.createClass({
     }
   },
 
-  goToPage(pageNumber, animate = true) {
+  goToPage(pageNumber) {
 
     var pageCount = this.props.dataSource.getPageCount();
     if (pageNumber < 0 || pageNumber >= pageCount) {
@@ -177,44 +167,41 @@ var ViewPager = React.createClass({
     }
 
     var step = pageNumber - this.state.currentPage;
-    this.movePage(step, null, animate);
+    this.movePage(step);
   },
 
-  movePage(step, gs, animate = true) {
+  movePage(step, gs) {
     var pageCount = this.props.dataSource.getPageCount();
     var pageNumber = this.state.currentPage + step;
+
     if (this.props.isLoop) {
-      pageNumber = pageCount == 0 ? pageNumber = 0 : ((pageNumber + pageCount) % pageCount);
+      pageNumber = (pageNumber + pageCount) % pageCount;
     } else {
       pageNumber = Math.min(Math.max(0, pageNumber), pageCount - 1);
     }
 
-    const moved = pageNumber !== this.state.currentPage;
-    const scrollStep = (moved ? step : 0) + this.childIndex;
-    const nextChildIdx = (pageNumber > 0 || this.props.isLoop) ? 1 : 0;
+    var moved = pageNumber !== this.state.currentPage;
+    var scrollStep = (moved ? step : 0) + this.childIndex;
 
-    const postChange = () => {
-      this.fling = false;
-      this.childIndex = nextChildIdx;
-      this.state.scrollValue.setValue(nextChildIdx);
-      this.setState({
-        currentPage: pageNumber,
-      });
-    };
+    this.fling = true;
 
-    if (animate) {
-      this.fling = true;
-      this.props.animation(this.state.scrollValue, scrollStep, gs)
-        .start((event) => {
-          if (event.finished) {
-            postChange();
-          }
-          moved && this.props.onChangePage && this.props.onChangePage(pageNumber);
-        });
-    } else {
-      postChange();
-      moved && this.props.onChangePage && this.props.onChangePage(pageNumber);
+    var nextChildIdx = 0;
+    if (pageNumber > 0 || this.props.isLoop) {
+      nextChildIdx = 1;
     }
+
+    this.props.animation(this.state.scrollValue, scrollStep, gs)
+      .start((event) => {
+        if (event.finished) {
+          this.fling = false;
+          this.childIndex = nextChildIdx;
+          this.state.scrollValue.setValue(nextChildIdx);
+          this.setState({
+            currentPage: pageNumber,
+          });
+        }
+        moved && this.props.onChangePage && this.props.onChangePage(pageNumber);
+      });
   },
 
   getCurrentPage() {
@@ -235,7 +222,7 @@ var ViewPager = React.createClass({
     }
   },
 
-  _getPage(pageIdx: number, loop:boolean = false ) {
+  _getPage(pageIdx: number, loop: boolean = false) {
     var dataSource = this.props.dataSource;
     var pageID = dataSource.pageIdentities[pageIdx];
     return (
