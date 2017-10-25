@@ -32,10 +32,12 @@ var ViewPager = require('react-native-viewpager');
 * **`dataSource`**: this is require to provide pages data,
 * **`renderPage`**: this is require to render page view,
 * **`autoPlay`**: `true` to turn page automatically,
+* **`initialPage`**: to set the index of the first page to load,
 * **`isLoop`**: `true` to run in infinite scroll mode,
 * **`locked`**: `true` to disable touch scroll,
 * **`onChangePage`**: page change callback,
 * **`renderPageIndicator`**: render custom ViewPager indicator.
+* **`initialPage`**: show initially some other page than first page.
 
 ## Page Transition Animation Controls
 
