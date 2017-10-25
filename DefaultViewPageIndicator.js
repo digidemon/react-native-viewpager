@@ -42,6 +42,7 @@ var styles = StyleSheet.create({
     borderRadius: DOT_SIZE / 2,
     backgroundColor: '#80ACD0',
     margin: DOT_SAPCE,
+    marginBottom: 0,
     bottom: 0,
   },
 });
